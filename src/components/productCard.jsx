@@ -2,28 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { addToCart } from "../utils/cartUtils";
 
-const parseImages = (images) => {
-  try {
-    if (typeof images === "string") {
-      const cleanedImages = images
-        .replace(/^\["/, "")
-        .replace(/"]$/, "")
-        .replace(/\\/g, "")
-        .split('","');
-      return cleanedImages.filter((url) => url.startsWith("http"));
-    }
-    if (Array.isArray(images)) {
-      return images.filter((url) => url.startsWith("http"));
-    }
-    return [];
-  } catch (e) {
-    console.error("Error parsing images:", e);
-    return [];
-  }
-};
-
 const ProductCard = ({ product }) => {
-  const imageUrls = parseImages(product.images);
+  const imageUrls = product.images;
   if (imageUrls.length === 0) {
     return null;
   }

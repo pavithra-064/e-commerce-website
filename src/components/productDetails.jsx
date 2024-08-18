@@ -4,25 +4,6 @@ import { addToCart } from "../utils/cartUtils";
 import { FaArrowLeft } from "react-icons/fa";
 import Navbar from "../components/navbar"; 
 
-const parseImages = (images) => {
-  try {
-    if (typeof images === "string") {
-      const cleanedImages = images
-        .replace(/^\["/, "")
-        .replace(/"]$/, "")
-        .replace(/\\/g, "")
-        .split('","');
-      return cleanedImages.filter((url) => url.startsWith("http"));
-    }
-    if (Array.isArray(images)) {
-      return images.filter((url) => url.startsWith("http"));
-    }
-    return [];
-  } catch (e) {
-    console.error("Error parsing images:", e);
-    return [];
-  }
-};
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -61,7 +42,7 @@ const ProductDetails = () => {
     );
   }
 
-  const imageUrls = parseImages(product.images);
+  const imageUrls = product.images;
   const mainImage = imageUrls[0];
 
   return (
