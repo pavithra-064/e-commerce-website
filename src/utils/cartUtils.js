@@ -9,12 +9,16 @@ export const updateCartItemQuantity = (id, quantity) => {
     item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
   );
   localStorage.setItem("cart", JSON.stringify(updatedCart));
+  const cartUpdatedEvent = new Event("cartUpdated");
+  window.dispatchEvent(cartUpdatedEvent);
 };
 
 export const removeCartItem = (id) => {
   const cart = getCartItems();
   const updatedCart = cart.filter((item) => item.id !== id);
   localStorage.setItem("cart", JSON.stringify(updatedCart));
+  const cartUpdatedEvent = new Event("cartUpdated");
+  window.dispatchEvent(cartUpdatedEvent);
 };
 
 export const addToCart = (product) => {

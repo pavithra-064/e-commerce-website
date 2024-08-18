@@ -5,12 +5,14 @@ function ProductPage() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/products")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
+        setIsLoading(true);
         setFilteredProducts(data);
       })
       .catch((error) => console.error("Error fetching data:", error));
@@ -35,14 +37,21 @@ function ProductPage() {
   return (
     <div>
       <Navbar onSearch={setSearchQuery} />
-      <div className="container mx-auto px-20 py-10 ">
-        <h1 className="text-3xl font-bold text-center mb-8">All Products</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-10">
-          {filteredProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+      {loading && (
+        <div className="container mx-auto  md:px-20 py-10 ">
+          <h1 className="text-3xl font-bold text-center mb-8">All Products</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 px-10">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
+      {!loading && (
+        <div className="flex items-center justify-center min-h-screen font-semibold text-xl -mt-10">
+          Loading...
+        </div>
+      )}
     </div>
   );
 }

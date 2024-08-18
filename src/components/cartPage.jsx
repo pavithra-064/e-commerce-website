@@ -32,8 +32,8 @@ const CartPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex flex-col md:flex-row px-20 py-10">
-        <div className="w-full md:w-3/4 p-4 border-r border-gray-200">
+      <div className="flex flex-col-reverse md:flex-row md:px-20 px-10 items-center md:items-start mx-auto py-10">
+        <div className="w-full md:w-3/4 p-4 border-[1.5px] border-gray-200 mt-10 md:mt-0">
           <h2 className="text-2xl font-semibold mb-4">Shopping Cart</h2>
           {cartItems.length === 0 ? (
             <p>Your cart is empty</p>
@@ -77,14 +77,14 @@ const CartPage = () => {
                     </div>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold">{item.title}</h3>
-                    <p className="text-gray-600">₹{item.price * 10}.00</p>
+                    <h3 className="text-md md:text-lg font-semibold">{item.title}</h3>
+                    <p className="text-gray-600 text-sm md:text-md">₹{item.price * 10}.00</p>
 
-                    <p className="text-gray-600 mt-1">
+                    <p className="text-gray-600 mt-1 text-sm md:text-md">
                       Total: ₹{(item.price * 10 * item.quantity).toFixed(2)}
                     </p>
                     <button
-                      className=" font-semibold uppercase p-2 mt-6 rounded-lg text-sm border border-red-500 hover:bg-red-100 "
+                      className=" font-semibold uppercase p-2 mt-6 rounded-lg text-xs md:text-sm border border-red-500 hover:bg-red-100 "
                       onClick={() => handleRemoveItem(item.id)}
                     >
                       Remove Item
@@ -95,7 +95,7 @@ const CartPage = () => {
             </div>
           )}
         </div>
-        <div className="w-full md:w-1/4 p-4 border-[1.2px] border-gray-700 min-h-48 absolute right-7">
+        <div className="w-[18rem] md:w-1/4 p-4 border-[1.2px] border-gray-700 min-h-48 md:absolute md:right-7">
           <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
           <div className="border-t border-gray-700 pt-4">
             <div className="flex justify-between mb-2">
@@ -105,7 +105,7 @@ const CartPage = () => {
             {subtotal > 0 && (
               <div className="flex justify-between mb-2">
                 <span className="text-gray-600">Discount:</span>
-                <span className="text-green-600">- ₹{discount.toFixed(2)}</span>
+                <span className="text-green-600">- ₹{(subtotal*discount) .toFixed(2)}</span>
               </div>
             )}
             {subtotal > 0 && (

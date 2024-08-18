@@ -27,7 +27,7 @@ const Navbar = ({ onSearch }) => {
     onSearch(e.target.value);
   };
   return (
-    <nav className="bg-gray-800 p-4 px-10 flex items-center justify-between">
+    <nav className="bg-gray-800 p-4 md:px-10 flex items-center justify-between">
       <div className="text-white text-xl font-semibold">
         <Link to="/">Profile.fyi</Link>
       </div>
@@ -45,10 +45,11 @@ const Navbar = ({ onSearch }) => {
         />
       </div>
 
-      <div className="text-white text-xl relative">
-        <Link to="/mycart">
-          My Cart
-          <FontAwesomeIcon icon={faShoppingCart} className="pl-2" />{" "}
+      <div className="text-white text-xl relative flex items-center">
+        <div className="hidden md:block mr-2">My Cart</div>
+
+        <Link to="/mycart" className="relative">
+          <FontAwesomeIcon icon={faShoppingCart} />
           {cartItemCount > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-[0.3rem] py-[0.1rem] text-xs">
               {cartItemCount}
